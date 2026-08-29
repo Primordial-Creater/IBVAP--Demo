@@ -1,0 +1,9 @@
+# Dataset Configuration for IBVAP Object Detection
+path: ./dataset  # root directory
+train: images/train
+val: images/val
+
+# Classes
+names:
+  0: Human
+  1: Vehicle

@@ -1,0 +1,35 @@
+System Overview & Progress Briefing: Project IBVAP
+
+We are working on designing and developing an AI-driven software platform called IBVAP (Intelligent Border Video Analytics Platform). The primary goal of this platform is to convert existing, conventional IP-based CCTV infrastructure into an intelligent surveillance network without relying on specialized or proprietary hardware.
+
+Core Platform Requirements from the Description:
+• Human detection, persistent tracking, and face detection.
+• Vehicle detection, classification, and Automatic Number Plate Recognition (ANPR).
+• Virtual fence intrusion detection via Line Crossing / Region of Interest (ROI).
+• Suspicious activity/behavioral analytics (loitering, running, crawling) using pose estimation.
+• Night-time movement detection optimized for grayscale/Infrared/Thermal camera feeds.
+• Real-time alert generation, logging, and integration with existing command and control centers.
+
+Technical Architecture Decisions Strategy:
+1. Hybrid Edge-Cloud or local Edge Deployment: To operate in remote border outposts with strict bandwidth limits, the processing must happen locally at the edge. Only lightweight metadata/alerts and compressed event snapshots will be sent across the network.
+2. Production Frameworks: Leveraging Python/C++, OpenCV for feed ingestion/ROI math, and modern YOLO architectures optimized via TensorRT/ONNX for hardware-agnostic edge deployment.
+3. Decoupled AI Pipeline: Avoid a single monolithic network. The system is split into specialized, modular sub-pipelines (e.g., Object Detection -> Cropping -> FRS/ANPR).
+
+What We Have Developed Till Now:
+We have established the base object detection framework for tracking Humans and Vehicles using YOLOv11. We set up the files for:
+1. `data.yaml`: Structuring the dataset paths and defining the custom labels (Class 0: Human, Class 1: Vehicle) for fine-tuning.
+2. `train_ibvap.py`: A machine learning training script utilizing the ultralytics library to fine-tune a lightweight model with data augmentations tailored for unstable border conditions.
+3. `inference_ibvap.py`: An operational deployment script that hooks into live video streams (via webcam or RTSP paths) and performs multi-object persistent tracking (`.track(persist=True)`).
+
+Next Implementation Priorities:
+We need to progress the platform by writing the logic for the next modules. Please help me build upon this existing foundational YOLO setup to implement the remaining capabilities.
+
+
+
+
+
+
+
+
+
+
